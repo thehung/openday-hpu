@@ -12,28 +12,24 @@ layout: reference
   <div class="block">
     <p>Rẽ nhánh là một trong các tính năng tôi thích của Git.
     Khi làm việc với git, sẽ có ích nếu bạn tạm quên đi khái niệm rẽ nhánh
-    mà bạn từng biết khi làm việc với các hệ thống quản lý phiên bản khác,
+    mà bạn từng biết trong các hệ thống quản lý phiên bản khác;
     vì thực tế, rẽ nhánh trong git gần giống như một <i>ngữ cảnh</i>.
-    If you have used other
-    version control systems, it's probably helpful to forget most of what you
-    think about branches - in fact, it may be more helpful to think of them
-    practically as <i>contexts</i> since that is how you will most often be
-    using them.  When you checkout different branches, you change contexts
-    that you are working in and you can quickly context-switch back and forth
-    between several different branches.
+    Mỗi khi rẽ vào một nhánh, cũng như khi bạn đổi ngữ cảnh làm việc mới,
+    và sau đó có thể nhanh chóng quay lại ngữ cảnh cũ.
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can create a branch with
-    <code>git branch (branchname)</code>, switch into that context with
-    <code>git checkout (branchname)</code>, record commit snapshots while
-    in that context, then can switch back and forth easily. When you switch
-    branches, Git replaces your working directory with the snapshot of the
-    latest commit on that branch so you don't have to have multiple directories
-    for multiple branches.  You merge branches together with
-    <code>git merge</code>.  You can easily merge multiple times from the same
-    branch over time, or alternately you can choose to delete a branch
-    immediately after merging it.
+    <b>Một cách tóm tắt</b> bạn tạo ra một nhánh mới bằng
+    <code>git branch tên_nhánh</code>, sau đó rẽ vào nhánh đó bằng
+    <code>git checkout tên_nhánh</code>, lưu lại các thay đổi trong ngữ cảnh
+    mới, và sau đó có thể chuyển đổi qua nhánh khác dễ dàng.
+    Mỗi khi rẽ vào một nhánh, Git sẽ thay thư mục làm việc bởi ảnh mới
+    nhất của nhánh đó, và vì vậy bạn không phải xử lý nhiều thư mục khác nhau
+    cho nhiều nhánh (có nghĩa là, chỉ dùng một thư mục cho nhiều nhánh. Điều
+    này rất khác với cách tiếp cận của Subversion -- ND). Cuối cùng, để
+    trộn hai nhánh với nhau, dùng <code>git merge</code>. Có thể dễ dàng
+    trộn nhiều lần hai nhánh với nhau, hoặc có thể xóa một nhánh sau khi
+    nó đã được trộn.
     </p>
 
   </div>
