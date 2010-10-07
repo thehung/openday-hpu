@@ -18,6 +18,14 @@ layout: reference
     và sau đó có thể nhanh chóng quay lại ngữ cảnh cũ.
     </p>
 
+    <p>
+    ND: Việc rẽ nhánh giống như việc đang đi trên đường thì bạn muốn
+    rẽ sang ngã khác (ngã ba, ngã tư chẳng hạn), để thực hiện một số
+    việc như thăm người quen, tránh kẹt xe, rồi quay trở lại đường
+    chính sau. Một nhánh trong Git gần như một đoạn đường hoặc con đường.
+    Nếu các con đường ở Sài Gòn đã cố định, thì con đường trong Git
+    dễ chịu hơn mà bạn có thể tạo ra bất kỳ lúc nào :)</p>
+
     <p class="nutshell">
     <b>Tóm tắt:</b> bạn tạo ra một nhánh mới bằng
             <code>git branch tên_nhánh</code>,
@@ -269,11 +277,12 @@ Fast-forward
       các phép trộn phức tạp hơn
     </h4>
 
-    <p>Of course, this doesn't just work for simple file additions and
-    deletions. Git will merge file modifications as well - in fact, it's very
-    good at it.  For example, let's see what happens when we edit a file in
-    one branch and in another branch we rename it and then edit it and then
-    merge these branches together.  Chaos, you say?  Let's see.
+    <p>Tất nhiên, quá trình phát triển của mã nguồn không chỉ đơn giản
+    là thêm và xóa tập tin :). Git còn hỗ trợ thêm việc trộn các thay đổi
+    (hoặc sự khác biệt) giữa của tập tin ở hai nhánh khác nhau.
+    Lấy ví dụ, ta sẽ chỉnh nội dung tập tin ở một nhánh, trong khi ở nhánh
+    kia ta đổi tên tập tin, rồi rồi trộn hai tập tin đó với nhau. Nghe
+    có vẻ rối đây! Xem Git giải quyết thế nào nhé!
     </p>
 
 <pre>
@@ -289,9 +298,9 @@ end
 HelloWorld.hello
 </pre>
 
-    <p>So first we're going to create a new branch named 'change_class' and
-    switch to it so your class renaming changes are isolated. I'm going to
-    change each instance of 'HelloWorld' to 'HiWorld'.</p>
+    <p>Bây giờ ta đang ở nhánh 'master'. Ta sẽ tạo nhánh 'change_class'
+    và rẽ ngay vào nhánh đó: trong nhánh mới ta sẽ thực hiện đổi tên lớp
+    từ 'HelloWorld' dthành 'HiWorld'.</p>
 
 <pre>
 <b>$ git checkout -b change_class</b>
@@ -305,11 +314,11 @@ class HiWorld
  1 files changed, 2 insertions(+), 4 deletions(-)
 </pre>
 
-    <p>So now I've committed the class renaming changes to the 'change_class'
-      branch.  If I now switch back to the 'master' branch my class name will
-      revert to what it was before I switched branches. Here I can change
-      something different (in this case the printed output) and at the same
-      time rename the file from <code>hello.rb</code> to <code>ruby.rb</code>.
+    <p>Việc đổi tên lớp được xác nhận sau lệnh <code>git commit</code>.
+      Ta sẽ trở lại nhánh chính 'master' và sẽ thấy rằng trong tên lớp
+      vẫn là 'HelloWorld' (như cũ!). Ta sẽ đổi xem có sự khác biệt nào
+      với thay đổi đã thực hiện ở nhánh 'change_class', đồng thời đổi tên
+      tập tin từ <code>hello.rb</code> thành <code>ruby.rb</code>.
       </b>
 
 <pre>
@@ -337,11 +346,11 @@ index 2aabb6e..bf64b17 100644
  rename hello.rb => ruby.rb (65%)
 </pre>
 
-    <p>Now those changes are recorded in my 'master' branch.  Notice that the
-      class name is back to 'HelloWorld', not 'HiWorld'.  Now I want to
-      incorporate the 'HiWorld' change so I can just merge in my 'change_class'
-      branch.  However, I've changed the name of the file since I branched,
-      what will Git do?</p>
+    <p>Như ban thấy, sự thay đổi tên tập tin và nội dung cũng vừa được
+      xác nhận trong nhánh 'master'. Để ý rằng, tên lớp vẫn là 'HelloWorld'.
+      Nếu muốn thay đổi cả tên của lớp thành 'HiWorld', ta chỉ việc trộn
+      nội dung ở nhánh 'change_class' vào nhánh 'master'. Nhưng liệu Git
+      có trộn được không, vì tên tập tin đã đổi? Hãy xem:</p>
 
 <pre>
 <b>$ git branch</b>
@@ -363,19 +372,18 @@ end
 HiWorld.hello
 </pre>
 
-    <p>Well, it will just figure it out. Notice that I had no merge conflicts
-    and the file that had been renamed now has the 'HiWorld' class name change
-    that was done in the other branch. Pretty cool.</p>
+    <p>Tốt quá, mọi chuyện diễn ra đúng như mong đợi. Như vậy trong quá
+    trình trộn ta đã không gặp xung đột nào, kể cả việc đổi tên tập tin
+    hoặc đổi tên lớp diễn ra ở nhánh khác</p>
 
     <h4>
       merge conflicts
     </h4>
 
-    <p>So, Git merges are magical, we never ever have to deal with merge
-      conflicts again, right?  Not quite.  In situations where the same block
-      of code is edited in different branches there is no way for a computer
-      to figure it out, so it's up to us.  Let's see another example of changing
-      the same line in two branches.
+    <p>Như vậy, Git thật là khéo léo, nhưng ta chưa hề đụng tới trường hợp
+      có xung đột. Không sao, khi xảy ra sự khác biệt về mã giữa hai nhánh
+      mà Git không thể hình dung được, sẽ tới phiên chúng ta giải quyết.
+      Trong ví dụ sau, ta sẽ thay đổi cùng một dòng của tập tin ở hai nhánh.
     <p>
 
 <pre>
@@ -389,9 +397,9 @@ Switched to a new branch 'fix_readme'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-    <p>Now we have committed a change to one line in our README file in a
-      branch.  Now let's change the same line in a different way back on
-      our 'master' branch.</p>
+    <p>Sau khi rẽ vào nhánh 'fix_readme', ta thực hiện thay đổi một dòng
+      trong tập tin 'README'. Tiếp theo ta sẽ thay đổi cùng dòng đó, nhưng
+      ở tập tin của nhánh 'master'.</p>
 
 <pre>
 <b>$ git checkout master</b>
@@ -402,8 +410,8 @@ Switched to branch 'master'
  1 files changed, 1 insertions(+), 1 deletions(-)
 </pre>
 
-    <p>Now is the fun part - we will merge the first branch into our master
-      branch, causing a merge conflict.</p>
+    <p>Hãy xem có điều thú vị gì xảy ra khi trộn hai tập tin có xung đột
+    với nhau:</p>
 
 <pre>
 <b>$ git merge fix_readme</b>
@@ -421,12 +429,12 @@ This project has examples of hello world in
 nearly every programming language.
 </pre>
 
-    <p>You can see that Git inserts standard merge conflict markers, much like
-      Subversion, into files when it gets a merge conflict.  Now it's up to us
-      to resolve them.  We will do it manually here, but check out
-      <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git mergetool</a>
-      if you want Git to fire up a graphical mergetool
-      (like kdiff3, emerge, p4merge, etc) instead.
+    <p>Như bạn thấy, Git chèn vào các ký hiệu đánh dấu sự xung đột xảy
+      ra khi trộn. Git đã 'bó tay' khi dừng lại ở đó, và tới phiên bạn
+      quyết định. Để ý là,
+      <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">một số công cụ đồ họa</a>
+      như kdiff3, emerge, p4merge, ... sẽ giúp việc giải quyết xung đột
+      dễ dàng hơn.
     </p>
 
 <pre>
