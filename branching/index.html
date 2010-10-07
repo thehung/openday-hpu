@@ -73,7 +73,7 @@ layout: reference
     </h4>
 
     <p>Khi không có tham số, <code>git branch</code> sẽ liệt kê các nhánh
-    bạn tạo hoặc đang làm việc (được đánh dấu sao <b>*</b> hoặc
+    sẵn có, riêng nhánh bạn đang rẽ vào được đánh dấu sao <b>*</b> hoặc
       <a href="http://progit.org/book/ch7-1.html#colors_in_git">tô màu xanh lá</a>).
     </p>
 
@@ -153,7 +153,7 @@ README   hello.rb more.txt test.txt
     <p>
     Trong nhiều trường hợp bạn muốn rẽ vào một nhánh ngay sau khi nhánh
     đó được tạo ra. Thay vì phải dùng cặp lệnh
-      <code>git branch newbranch; git checkout newbranch</code>,
+      <code>git branch tên_nhán; git checkout tên_nhánh</code>,
     bạn chỉ gõ tắt
       <code>git checkout -b tên_nhánh</code>.
     </p>
@@ -182,27 +182,30 @@ Switched to branch 'master'
 README   hello.rb more.txt test.txt
 </pre>
 
-    <p>You can see there how we created a branch, removed some of our files
-    while in the context of that branch, then switched back to our main branch
-    and we see the files return. Branching safely isolates work that we do into
-    contexts we can switch between.</p>
+    <p>Như thấy ở trên, ta rẽ vào nhánh 'removals' ngay sau khi tạo ra nhánh
+    đó; trong nhánh này, ta thực hiện xóa bớt một số tập tin, xác nhận việc
+    xóa và rồi quay lại nhánh chính 'master', ở đó các tập tin vừa xóa sẽ
+    xuất hiện trở lại. Như vậy, việc rẽ nhánh hiểu và phân chia thư mục
+    làm việc theo đúng ngữ cảnh được chỉ định; việc chuyển đổi giữa các
+    nhánh không làm mất đi tập tin hoặc không gây ra nhầm lẫn.</p>
 
     <p>
-    If you start on work it is very useful to
-    always start it in a branch (because it's fast and easy to do) and then
-    merge it in and delete the branch when you're done.  That way if what you're
-    working on doesn't work out you can easily discard it and if you're forced
-    to switch back to a more stable context your work in progress is easy to put
-    aside and then come back to.</p>
+    Khi bắt đầu một dự án, bạn nên rẽ vào một nhánh riêng của dự án đó
+    (việc này cũng nhanh và dễ), và sau đó trộn nhánh của bạn với nhánh
+    chính của dự án; sau khi trộn thì có thể xóa nhánh riêng bạn tạo ra.
+    Bằng cách đó, bạn dễ dàng chuyển qua phiên bản (nhánh) ổn định của dự
+    án khi xảy ra vấn đề trên nhánh bạn phát triển; hơn nữa, bạn cũng có thể
+    dễ dàng tạm gác lại công việc của bạn trên nhánh riêng, để quay trở lại
+    các nhánh cũ do yêu cầu bắt buộc của dự án.</p>
 
     <h4>
-      git branch -d (branchname)
-      <small>delete a branch</small>
+      git branch -d tên_nhánh
+      <small>xóa một nhánh</small>
     </h4>
 
-    <p>If we want to delete a branch (such as the 'testing' branch in the
-    previous example, since there is no unique work on it),
-    we can run <code>git branch -d (branch)</code> to remove it.
+    <p>Để xóa một nhánh, bạn chỉ việc dùng lệnh
+      <code>git branch -d tên_nhánh</code>. Ví dụ, ta sẽ xóa nhánh
+      'testing' đã tạo ra ở ví dụ ở trên.
 
 <pre>
 <b>$ git branch</b>
@@ -215,9 +218,8 @@ Deleted branch testing (was 78b2670).
 </pre>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you use <code>git branch</code> to list your
-    current branches, create new branches and delete unnecessary or
-    already merged branches.
+    <b>Tóm tắt:</b> bạn dùng <code>git branch</code> để liệt kê các nhánh
+    hiện có, rẽ nhánh mới hoặc xóa đi các nhánh đã trộn hoặc không còn cần thiết.
     </p>
 
   </div>
@@ -226,22 +228,23 @@ Deleted branch testing (was 78b2670).
 <div class="box">
   <h2>
     <span class="docs">
-      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">docs</a> &nbsp;
-      <a target="new" href="http://progit.org/book/ch3-2.html#basic_merging">book</a>
+      <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">tài liệu</a> &nbsp;
+      <a target="new" href="http://progit.org/book/ch3-2.html#basic_merging">sách</a>
     </span>
     <a name="merge">git merge</a>
-    <span class="desc">merge a branch context into your current one</span>
+    <span class="desc">trộn một nhánh vào nhánh đang làm việc</span>
   </h2>
 
   <div class="block">
-    <p>Once you have work isolated in a branch, you will eventually want to
-    incorporate it into your main branch.  You can merge any branch into your
-    current branch with the <code>git merge</code> command.  Let's take as a
-    simple example the 'removals' branch from above.  If we create a branch
-    and remove files in it and commit our removals to that branch, it is
-    isolated from our main ('master', in this case) branch.  To include those
-    deletions in your 'master' branch, you can just merge in the 'removals'
-    branch.
+    <p>Sau khi chia công việc riêng ra từng nhánh, có lúc bạn sẽ cần trộn
+    các nhánh với nhau, hoặc với nhánh chính. Để trộn, bạn dùng lệnh
+      <code>git merge</code>.
+    Xét ví dụ ở trên với nhánh 'removals'. Ta nhớ lại rằng sau khi rẽ vào
+    nhánh 'removals', ta xóa đi một vài tập tin và xác nhận sự thay đổi.
+    Việc xóa tập tin này chỉ diễn ra ở nhánh 'removals', còn ở nhánh chính
+    'master' không có tập tin nào được xóa. Bây giờ, để xác nhận rằng cả
+    các tập tin bị xóa trong 'removals' cũng bị xóa trong 'master', ta chỉ
+    việc trộn nhánh 'removals' với 'master'.
     </p>
 
 <pre>
@@ -263,7 +266,7 @@ Fast-forward
 </pre>
 
     <h4>
-      more complex merges
+      các phép trộn phức tạp hơn
     </h4>
 
     <p>Of course, this doesn't just work for simple file additions and
