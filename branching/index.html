@@ -696,10 +696,10 @@ ab5ab4c added erlang
     </p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you use <code>git log</code> to list out the commit
-    history or list of changes people have made that have lead to the snapshot
-    at the tip of the branch.  This allows you to see how the project in that
-    context got to the state that it is currently in.
+    <b>Tóm tắt:</b> bạn dùng <code>git log</code> để liệt kê thông tin về
+    các lần xác nhận sự thay đổi mã nguồn hoặc các lý do của việc rẽ nhánh,
+    nhờ đó giúp bạn hình dung quá trình phát triển và trạng thái hiện tại
+    của dự án.
     </p>
 
   </div>
@@ -718,31 +718,30 @@ ab5ab4c added erlang
   <div class="block">
 
     <p>
-    If you get to a point that is important and you want to forever remember
-    that specific commit snapshot, you can tag it with <code>git tag</code>.
-    The <code>tag</code> command will basically put a permanent bookmark at
-    a specific commit so you can use it to compare to other commits in the
-    future.  This is often done when you cut a release or ship something.
+    Có một số thời điểm quan trọng trong quá trình phát triển dự án mà
+    bạn muốn ghi nhớ một cách dễ dàng và dài lâu. Chúng được đánh dấu
+    bằng lệnh <code>git tag</code>: lệnh này đánh dấu ở một điểm trên nhánh
+    để bạn có thể dễ dàng so sánh với các xác nhận khác trong tương lai.
+    Thường thì bạn sẽ dùng 'tag' (thẻ) khi đưa ra một phiên bản của dự án.
     </p>
 
-    <p>Let's say we want to release our Hello World project as version "1.0".
-    We can tag the last commit (<code>HEAD</code>) as "v1.0" by running
-    <code>git tag -a v1.0</code>.  The <code>-a</code> means "make an annotated
-    tag", which allows you to add a tag message to it, which is what you almost
-    always want to do.  Running this without the <code>-a</code> works too, but
-    it doesn't record when it was tagged, who tagged it, or let you add a tag
-    message. I would recommend always creating annotated tags.</p>
+    <p>Ví dụ, ta muốn công bố phiên bản "1.0" của chương trình HelloWorld.
+    Ta có đánh dấu sự thay đổi cuối cùng (<code>HEAD</code>) là "v1.0" bằng
+    lệnh <code>git tag -a v1.0</code>. Tùy chọn <code>-a</code> cho phép
+    bạn thêm chú thích cho thẻ "v1.0". Mặc dù việc không dùng tùy chọn đó
+    cũng có tác dụng đánh dấu, nhưng kết quả là thông tin về thời điểm đánh
+    dấu, tác giả, các ghi chú bổ sung sẽ không được lưu lại. Vì vậy,
+    bạn luôn nên dùng tùy chọn <code>-a</code>.</p>
 
 <pre>
 <b>$ git tag -a v1.0 </b>
 </pre>
 
-  <p>When you run the <code>git tag -a</code> command, Git will open your editor
-    and have you write a tag message, just like you would write a commit
-    message.</p>
+  <p>Sau lệnh <code>git tag -a</code> như trên, Git sẽ mở ra trình sọan thảo
+    để bạn bắt đầu ghi thông tin chi tiết về thẻ.</p>
 
-  <p>Now, notice when we run <code>git log --decorate</code>, we can see our
-    tag there.</p>
+  <p>Sau đó, sử dụng lệnh <code>git log --decorate</code>, ngoài các thông
+  tin về những lần xác nhận, bạn còn thấy thêm thông tin về các thẻ.</p>
 
 <pre>
 <b>$ git log --oneline --decorate --graph</b>
@@ -760,15 +759,16 @@ ab5ab4c added erlang
 * 17f4acf first commit
 </pre>
 
-  <p>If we do more commits, the tag will stay right at that commit, so we have
-    that specific snapshot tagged forever and can always compare future
-    snapshots to it.</p>
+  <p>Nếu sau khi đánh dấu, bạn xác nhận thêm các thay đổi, thẻ vẫn giữ
+    nguyên vị trí ở lần nó tạo ra lần đầu tiên. Như vậy, thẻ được đánh dấu
+    sẽ cố định và có thể dùng để so sánh với các trạng thái mới của dự án
+    trong tương lai.</p>
 
-  <p>We don't have to tag the commit that we're on, however.  If we forgot to
-    tag a commit that we released, we can retroactively tag it by running the
-    same command, but with the commit SHA at the end.  For example, say we had
-    released commit <code>558151a</code> (several commits back) but forgot to
-    tag it at the time.  We can just tag it now:</p>
+  <p>Việc đánh dấu cho các thay đổi hiển nhiên không phải là điều bắt buộc.
+    Có thể xảy ra việc bạn đã công bố một phiên bản của dự án mà không (quên)
+    đánh dấu. Khi đó, nếu muốn bổ sung đánh dấu, bạn cũng dùng lệnh <code>git tag</code>,
+    nhưng đi kèm với chỉ số của xác nhận. Ví dụ, ta sẽ đánh dấu cho xác
+    nhận mang chỉ số <code>558151a</code> như sau đây:</p>
 
 <pre>
 <b>$ git tag -a v0.9 558151a</b>
@@ -790,5 +790,5 @@ ab5ab4c added erlang
   </div>
 </div>
 
-<p><a href="/remotes">On to Sharing and Updating Projects &#187;</a></p>
+<p><a href="/remotes">Chia sẻ và Cập nhật dự án &#187;</a></p>
 
