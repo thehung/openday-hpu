@@ -11,31 +11,31 @@ layout: reference
   </h2>
   <div class="block">
     <p>
-    Git doesn't have a central server like Subversion.  All of the commands
-    so far have been done locally, just updating a local database.
-    To collaborate with other developers in Git, you have to put all that
-    data on a server that the other developers have access to.  The way Git
-    does this is to syncronize your data with another repository.  There
-    is no real difference between a server and a client - a Git repository
-    is a Git repository and you can syncronize between any two easily.
+    Git không tập trung dữ liệu mở một máy phục vụ như Subversion. Mà tất
+    cả thao tác sẽ cập nhật dữ liệu ngay trên máy tính của bạn. Để cộng tác
+    với người khác, bạn phải đẩy dữ liệu lên một máy phục vụ chung mà họ
+    có quyền truy cập, và nhờ đó đồng bộ kho lưu trên máy bạn với kho lưu
+    trên máy phục vụ. Không có sự khác biệt giữa máy khách và máy phục vụ
+    dành cho Git, bởi vì kho lưu trữ ở máy khách đã đồng bộ với kho lưu trữ
+    trên máy phục vụ.
     </p>
 
-    <p>Once you have a Git repository, either one that you set up on your
-    own server, or one hosted someplace like GitHub, you can tell Git to
-    either push any data that you have that is not in the remote repository
-    up, or you can ask Git to fetch differences down from the other repo.
+    <p>
+    Môt khi đã có kho lưu trữ Git, hoặc là bạn sẽ thiết lập máy của bạn thành
+    một máy phục vụ sử dụng kho đó để chia sẻ, hoặc bạn sẽ tiến hành đồng
+    bộ hoặc khảo sát sự khác biệt giữa kho của bạn với kho Git khác bằng hai thao tác đẩy và kéo.
     </p>
 
-    <p>You can do this any time you are online, it does not have to correspond
-    with a <code>commit</code> or anything else.  Generally you will do a
-    number of commits locally, then fetch data from the online shared repository
-    you cloned the project from to get up to date, merge any new work into the
-    stuff you did, then push your changes back up.</p>
+    <p>
+    Thao tác đẩy và kéo được tiến hành bất kỳ khi nào bạn có kết nối mạng
+    với kho Git khác, trong khi đó thao tác xác nhận (<code>commit</code>)
+    được tiến hành hoàn tòan ở địa phương.</p>
 
     <p class="nutshell">
-    <b>In a nutshell</b> you can update your project with <code>git fetch</code>
-    and share your changes with <code>git push</code>. You can manage your
-    remote repositories with <code>git remote</code>.
+    <b>Tóm tắt:</b> bạn lấy các thông tin mới từ kho Git khác về máy của
+    bạn bằng lệnh <code>git fetch</code> (thao tác kéo), và chia sẻ những thay đổi do
+    bạn thực hiện bằng lệnh <code>git push</code> (thao tác đẩy)).
+    Địa chỉ các kho Git của dự án được quản lý nhờ <code>git remote</code>.
     </p>
   </div>
 </div>
@@ -47,20 +47,20 @@ layout: reference
       <a target="new" href="http://progit.org/book/ch2-5.html#showing_your_remotes">book</a>
     </span>
     <a name="remote">git remote</a>
-    <span class="desc">list, add and delete remote repository aliases</span>
+    <span class="desc">quản lý địa chỉ các kho Git</span>
   </h2>
 
   <div class="block">
 
-    <p>Unlike centralized version control systems that have a client that is
-    very different from a server, Git repositories are all basically equal and
-    you simply syncronize between them. This makes it easy to have more than
-    one remote repository - you can have some that you have read-only access to
-    and others that you can write to as well.</p>
+    <p>Vì Git không dùng một máy phục vụ chung để lưu dữ liệu như Subversion,
+    các kho lưu trữ Git bình đẳng nhau, nằm trên các máy khác nhau và nhiệm
+    vụ của bạn là đồng bộ những kho này với nhau. Từ đó, nảy sinh ra ý phải
+    quản lý các kho cùng với kết nối tới chúng, kể cả phân quyền (đọc với
+    kho này, được ghi vào kho kia,...). </p>
 
-    <p>So that you don't have to use the full URL of a remote repository every
-    time you want to syncronize with it, Git stores an alias or nickname for
-    each remote repository URL you are interested in. You use the
+    <p>Các khoa ở máy phục vụ khác nhau được phân biệt chỉ bằng địa chỉ
+    thực, mà bằng bởi tên ngắn gọn mà bạn gán cho địa chỉ đó. Như vậy,
+    việc sử dụng các kho sẽ dễ nhớ, đơn giản hơn rất nhiều.You use the
     <code>git remote</code> command to manage this list of remote repos that
     you care about.</p>
 
