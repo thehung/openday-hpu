@@ -67,11 +67,11 @@ layout: reference
 
     <h4>
       git remote
-      <small>liệt kê tên của các kho ở xa</small>
+      <small>liệt kê tên của các kho xa</small>
     </h4>
 
     <p>Khi dùng không có tham số, lệnh <code>git remote</code> liệt kê
-    các tên của các địa chỉ kho ở xa đã biết. Mặc định, địa chỉ kho đầu tiên
+    các tên của các địa chỉ kho xa đã biết. Mặc định, địa chỉ kho đầu tiên
     khi bạn vừa thực hiện lệnh nhân bản một kho sẽ có tên 'origin' (gốc).
     Khi có thêm tham số <code>-v</code>, ngoài tên của kho thì địa chỉ
     của kho cũng được in ra.</p>
@@ -143,7 +143,7 @@ github	git@github.com:schacon/hw.git (push)
 
     <p class="nutshell">
     <b>Tóm tắt:</b> với <code>git remote</code> bạn xem được danh sách
-    tên các kho ở xa cùng địa của kho. Lệnh <code>git remote add</code>
+    tên các kho xa cùng địa của kho. Lệnh <code>git remote add</code>
     dùng để thêm kho mới, còn <code>git remote rm</code> dùng để xóa đi.
     </p>
 
@@ -157,7 +157,7 @@ github	git@github.com:schacon/hw.git (push)
       <a target="new" href="http://progit.org/book/ch2-5.html#fetching_and_pulling_from_your_remotes">book</a>
     </span>
     <a name="fetch">git fetch</a>
-    <span class="desc">tải dữ liệu của nhánh ở xa về máy</span>
+    <span class="desc">tải dữ liệu của nhánh xa về máy</span>
   </h2>
 
   <br/>
@@ -168,21 +168,21 @@ github	git@github.com:schacon/hw.git (push)
       <a target="new" href="http://progit.org/book/">book</a>
     </span>
     <a name="pull">git pull</a>
-    <span class="desc">tải dữ liệu của nhánh ở xa về máy và thực hiện trộn</span>
+    <span class="desc">kéo dữ liệu của nhánh xa về máy và thực hiện trộn</span>
   </h2>
 
   <div class="block">
 
-    <p>Sau khi thêm kho ở xa, thì tự nhiên dẫn tới nhu cầu cập nhật dữ
+    <p>Sau khi thêm kho xa, thì tự nhiên dẫn tới nhu cầu cập nhật dữ
     liệu ở nhánh xa về máy tính của bạn. Git có hai lệnh cho nhu cầu này:
     Lệnh <code>git fetch</code> sẽ giúp thông tin trên máy của bạn cập nhật
-    so với nhánh ở xa, bằng cách tải thông tin từ kho xa về (chỉ tải những
+    so với nhánh xa, bằng cách tải thông tin từ kho xa về (chỉ tải những
     thông tin chưa có trên máy bạn) và đánh dấu để bạn biết bạn đã đồng
     bộ dữ liệu với nhánh nào trên kho xa. Cách này còn gọi là "nhánh xa",
     bởi vì sau khi cập nhật về, Git để nguyên đó mà không lấy ra và thay thế
     các nội dung đang có trong thư mục làm việc. Việc dùng <code>git fetch</code>
     giúp bạn kiểm tra các thay đổi, so sánh và thậm chí trộn các thay đổi
-    ở xa với thư mục làm việc của bạn.
+    xa với thư mục làm việc của bạn.
     </p>
 
     <p>Lệnh thứ hai để đồng bộ là <code>git pull</code>. Thực ra, lệnh này
@@ -196,7 +196,7 @@ github	git@github.com:schacon/hw.git (push)
     <a target="new" href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html">tài liệu chính thức</a>.
     </p>
 
-    <p>Bây giờ, đi vào chi tiết. Giả sử các kho ở xa đã được thiết lập và
+    <p>Bây giờ, đi vào chi tiết. Giả sử các kho xa đã được thiết lập và
     bạn muốn kéo thông tin từ xa về máy: bạn sẽ dùng lệnh <code>git fetch [tên kho]</code>.
     Sau đó, bạn có thể trộn bằng <code>git merge [tên khoa]/[tên nhánh]</code>.
     Chẳng hạn, khi đang thực hiện dự án Hello World, thấy có ai đó đã sửa
@@ -223,23 +223,29 @@ From github.com:schacon/hw
     là hoàn tòan mới, các nhánh còn lại 'master', 'c-langs' và 'java' được cập nhật.
     </p>
 
-    <p>You can see the mapping that Git makes.  The 'master' branch on the remote
-    repository becomes a branch named 'github/master' locally.  That way now I can
-    merge the 'master' branch on that remote into my local 'master' branch by running
-    <code>git merge github/master</code>.  Or, I can see what new commits are on that
-    branch by running <code>git log github/master ^master</code>.  If your remote
-    is named 'origin' it would be <code>origin/master</code> instead.  Almost any
-    command you would run using local branches you can use remote branches with too.
+    <p>Trong kết quả ở trên bạn thấy cách Git ánh xạ các nhánh với nhau.
+    Ví dụ, nhánh xa 'remote' tương ứng với nhánh 'github/master' trên máy
+    của bạn. Nhờ thế, để trộn nhánh xa 'master' với thư mục hiện tại,
+    bạn chỉ việc dùng lệnh <code>git merge github/master</code>.
+    Bạn cũng có thể xem những thay đổi diễn ra ở nhánh xa nhưng chưa
+    được trộn vào nhánh 'master' của bạn bằng lệnh
+      <code>git log github/master ^master</code>.
+    Để ý là, nếu bạn dùng tên 'origin' cho nhánh xa thì thay vì 'github/master'
+    như trong các ví dụ vừa rồi, bạn phải dùng <code>origin/master</code> instead.
+    Ngoài ra, hầu hết các lệnh các tác dụng với nhánh địa phương cũng
+    có thể dùng với nhánh xa.
     </p>
 
-    <p>If you have more than one remote repository, you can either fetch from specific
-    ones by running <code>git fetch [alias]</code> or you can tell Git to syncronize
-    with all of your remotes by running <code>git fetch --all</code>.
+    <p>Trường hợp có nhiều nhánh xa, ngoài việc chỉ định lấy thông tin
+    từ một nhánh cụ thể bằng lệnh <code>git fetch [tên kho]</code>
+    bạn có thể chỉ định Git cập nhật từ tất cả các nhánh bằng lệnh
+        <code>git fetch --all</code>.
 
     <p class="nutshell">
-    <b>In a nutshell</b> you run <code>git fetch [alias]</code> to syncronize your
-    repository with a remote repository, fetching all the data it has that you do
-    not into branch references locally for merging and whatnot.
+    <b>Tóm tắt:</b> Dùng <code>git fetch [tên kho]</code> để đồng bộ
+    dữ liệu từ kho ở xa đến kho của bạn, để lấy về những dữ liệu có ở xa
+    mà chưa có trong thư mục làm việc, và sau đó bạn có thể so sánh,
+    khảo sát và trộn các kết quả khi cần thiết.
     </p>
 
   </div>
@@ -253,15 +259,16 @@ From github.com:schacon/hw
       <a target="new" href="http://progit.org/book/ch2-5.html#pushing_to_your_remotes">book</a>
     </span>
     <a name="push">git push</a>
-    <span class="desc">push your new branches and data to a remote repository</span>
+    <span class="desc">đẩy kết quả lên kho xa</span>
   </h2>
 
   <div class="block">
-    <p>To share the cool commits you've done with others, you need to push your
-    changes to the remote repository. To do this, you run
-    <code>git push [alias] [branch]</code> which will attempt to make your [branch]
-    the new [branch] on the [alias] remote. Let's try it by initially pushing
-    our 'master' branch to the new 'github' remote we created earlier.</p>
+    <p>Sau khi thực hiện một số thay đổi cho dự án, xác nhận thay đổi
+    bằng lệnh <code>git commit</code>, bạn có thể chia sẻ thay đổi này
+    với mọi người bằng cách đẩy cách kết quả lênh nhánh ở xa. Thao tác này
+    ngược với việc kéo đã mô tả ở trên. Lệnh để thực hiện đẩy là
+    <code>git push [tên kho] [tên nhánh]</code>, sẽ chép nội dung nhánh
+    hiện tại thành nhánh ở kho xa. Ví dụ, ta sẽ đẩy nhánh 'master' lên kho xa:</p>
 
 <pre>
 <b>$ git push github master</b>
@@ -274,11 +281,11 @@ To git@github.com:schacon/hw.git
  * [new branch]      master -> master
 </pre>
 
-    <p>Pretty easy. Now if someone clones that repository they will get exactly
-    what I have committed and all of it's history.</p>
+    <p>Thật dễ dàng :) Sau khi đẩy như trên, một lập trình viên khác dễ
+    dàng kéo mọi thay đổi mà bạn thực hiện về máy tính của họ.</p>
 
-    <p>What if I have a topic branch like the 'erlang' branch we created earlier
-    and I just want to share that?  You can just push that branch instead.
+    <p>Trong ví dụ tiếp sau, ta tiếp tục đẩy nhánh 'erlang', thay vì
+    'master' như trên.
 
 <pre>
 <b>$ git push github erlang</b>
@@ -291,25 +298,20 @@ To git@github.com:schacon/hw.git
  * [new branch]      erlang -> erlang
 </pre>
 
-    <p>Now when people clone or fetch from that repository, they'll get a 'erlang'
-    branch they can look at and merge from. You can push any branch to any
-    remote repository that you have write access to in this way. If your branch
-    is already on the server, it will try to update it, if it is not, Git will
-    add it.</p>
+    <p>Sau lệnh trên, khi người khác nhân bản kho ở Github, hoặc kéo
+    thông tin từ kho đó, họ sẽ thấy nhánh 'erlang' để khảo sát hoặc trộn.
+    Ví dụ cho thấy, bạn có thể tạo ra nhánh bất kỳ và đẩy lên kho xa
+    mà bạn có quyền ghi. Nếu  nhánh chưa có trên kho, nhánh mới sẽ được
+    tạo ra, còn không thì nhánh cũ sẽ được cập nhật.</p>
 
-    <p>The last major issue you run into with pushing to remote branches is the
-    case of someone pushing in the meantime.  If you and another developer clone
-    at the same time, you both do commits, then she pushes and then you try to
-    push, Git will by default not allow you to overwrite her changes.  Instead,
-    it basically runs <code>git log</code> on the branch you're trying to push and
-    makes sure it can see the current tip of the servers branch in your pushes
-    history.  If it can't see what is on the server in your history, it concludes
-    that you are out of date and will reject your push.  You will rightly have to
-    fetch, merge then push again - which makes sure you take her changes into
-    account.</p>
-
-    <p>This is what happens when you try to push a branch to a remote branch
-    that has been updated in the meantime:</p>
+    <p>Vấn đề lớn nhất mà bạn có thể gặp khi đẩy dữ liệu lên kho xa,
+    là việc bạn và một người khác 'đồng thời' đẩy lên một nhánh của cùng một kho.
+    Nếu bạn là người thực hiện sau một chút, thì Git không cho phép bạn ghi
+    đè lên kết quả của người kia. Git sẽ dùng lệnh <code>git log</code>
+    ở phía máy phục vụ để kiểm tra xem kho địa phương của bạn có quá hạn
+    chưa; nếu đúng là quá hạn, Git từ chối và bạn phải kéo cập nhật từ
+    kho xa về, trộn trước khi đẩy lên kho.
+    Dưới đây là minh họa cho ý này:</p>
 
 <pre>
 <b>$ git push github master</b>
@@ -321,18 +323,20 @@ Merge the remote changes before pushing again.  See the 'Note about
 fast-forwards' section of 'git push --help' for details.
 </pre>
 
-    <p>You can fix this by running <code>git fetch github; git merge github/master</code>
-    and then pushing again.
+    <p>Vì Git từ chối thay đổi mà bạn đẩy lên, bạn phải dùng
+      <code>git fetch github; git merge github/master</code>
+    rồi mới đẩy lên lần nữa.
 
     <p class="nutshell">
-    <b>In a nutshell</b> you run <code>git push [alias] [branch]</code> to update a
-    remote repository with the changes you've made locally.  It will take what your
-    [branch] looks like and push it to be [branch] on the remote, if possible.  If
-    someone else has pushed since you last fetched and merged, the Git server will
-    deny your push until you are up to date.
+    <b>Tóm tắt:</b> Dùng <code>git push [tên kho] [tên nhánh]</code> để
+    đẩy các thay đổi mà bạn thực hiện ở máy lên kho xa. Git sẽ xem xét trạng
+    thái của nhánh ở kho xa và thực hiện chuyển dữ liệu nếu có thể.
+    Trường hợp nhánh của bạn đã quá hạn (hay quá cũ) so với thông tin
+    được xác nhận trên kho xa, Git từ chối và bạn phải thực hiện kéo
+    các thông tin từ trên kho về máy để tiếp tục.
     </p>
 
   </div>
 </div>
 
-<p><a href="/inspect">On to Inspection and Comparison &#187;</a></p>
+<p><a href="/inspect">Kiểm tra và So sánh &#187;</a></p>
