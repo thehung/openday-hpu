@@ -183,6 +183,7 @@ layout: reference
     </span>
     <a name="status">git status</a>
     <span class="desc">view the status of your files in the working directory and staging area</span>
+    <span class="desc">Xem trạng thái của thư mục hiện tại và vùng tạm</span>
   </h2>
 
   <div class="block">
@@ -194,6 +195,11 @@ layout: reference
     context and hints.  Here is the same status output with and without the
     <code>-s</code>.  The short output looks like this:
     </p>
+    <p>Như đã thấy trong mục <code>git add</code>, để xem trạng thái vùng tạm ta
+    dùng lệnh <code>git status</code>. Tôi đã trình bày nó với tùy chọn <code>-s</code>,
+    cho ta một kết quả ngắn gọn. Nếu không có tùy chọn nào, lệnh <code>git status</code>
+    sẽ cho thấy nhiều ngữ cảnh và gợi ý hơn. Dưới đây là kết quả của cùng một trạng
+    thái khi có và không có <code>-s</code>. Đây là kết quả ngắn:
 
 <pre>
 <b>$ git status -s</b>
@@ -202,6 +208,7 @@ layout: reference
 </pre>
 
     Where the same status with the long output looks like this:
+    Còn đây là cùng trạng thái trên nhưng với kết quả dạng đầy đủ:
 
 <pre>
 <b>$ git status</b>
@@ -227,9 +234,14 @@ layout: reference
     long output has useful tips and hints as to what commands you may want to
     use next.
     </p>
+    <p>Rất dễ để nhận ra sự khác biệt giữa hai kết quả trên. Dạng đầy đủ có chứa
+    gợi ý về lệnh mà ta sẽ dùng tiếp theo.
+    </p>
 
     <p>Git will also tell you about files that were deleted since your last
     commit or files that were modified or staged since your last commit.</p>
+    <p>Git cũng sẽ cho thấy những file đã bị xóa và file bị thay đổi hay đã
+    được ghi nhận kể từ lần xác nhận trước.
 
 <pre>
 <b>$ git status -s</b>
@@ -242,6 +254,10 @@ layout: reference
     So for example, if you have the README file staged and then you modify
     it again without running <code>git add</code> a second time, you'll see
     this:
+    Dạng ngắn của trạng thái bao gồm hai côt. Côt đầu tiên dành cho vùng tạm,
+    còn côt thứ hai là dành cho thư mục hiện hành. Nếu bạn đã sửa file README,
+    ghi nhận nó vào vùng tạm rồi lại sửa nó mà không thực hiện <code>git add</code>
+    lần nữa, kết quả sẽ như thế này:
 
 <pre>
 <b>$ git status -s</b>
@@ -254,7 +270,11 @@ layout: reference
     you run <code>git status</code> to see if anything has been modified
     and/or staged since your last commit so you can decide if you want to
     commit a new snapshot and what will be recorded in it.
+    <strong>Tóm tắt:</strong>,
+    dùng lệnh <code>git status</code> khi cần xem những thay đổi để quyết định
+    xem có nên ghi lại chúng hay không.
     </p>
+    
 
   </div>
 </div>
