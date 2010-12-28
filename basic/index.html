@@ -16,7 +16,7 @@ layout: reference
     the commands needed to compose and commit snapshots of your project.
     </p>
     <p>
-    Làm việc với Git thực tế là tạo ra và so sánh các bản sao của dự án. Phần
+    Làm việc với Git chủ yếu bao gồm tạo và so sánh các bản sao của dự án. Phần
     này trình bày về những lệnh cần thiết để tạo và xác nhận các bản sao.
     </p>
 
@@ -28,8 +28,9 @@ layout: reference
     </p>
     <p>
     Một khái niệm quan trọng của Git là 'chỉ mục'. Nó có thể được coi là một
-    vùng tạm dành cho bản sao, cho phép bạn tạo một bản sao bao gồm một nhóm
-    các thay đổi có ích thay vì phải xác nhận tất cả các file cùng một lúc.
+    vùng tạm chuẩn bị trước khi tạo bản sao, nhờ thế bạn có thể tạo những bản 
+    sao bao gồm một nhóm các thay đổi có ích thay vì phải xác nhận tất cả các
+    file cùng một lúc.
     </p>
 
     <p class="nutshell">
@@ -157,11 +158,18 @@ layout: reference
     Anything you've changed that is not added will not be included - this means
     you can craft your snapshots with a bit more precision than most other SCM
     systems.</p>
+    <p class="nutshell">
+    <strong>Tóm tắt:</strong>,
+    dùng <code>git add</code> để thêm file đã thay đổi vào phiên bản trước khi
+    tiến hành xác nhận, nhờ vậy mà các phiên bản có thể bao gồm chính xác những
+    file bạn muốn.</p>
 
     <p>For a very interesting example of using this flexibility to stage only
     parts of modified files at a time, see the '-p' option to
     <code>git add</code> in the Pro Git book.</p>
-
+    <p>Một điều rất thú vị là tính mềm dẻo này có thể được áp dụng để ghi nhận
+    chỉ một phần của file đã thay đổi, xem tùy chọn '-p' của <code>git add</code>
+    trong Pro Git.</p>
 
   </div>
 
