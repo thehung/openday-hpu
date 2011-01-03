@@ -17,7 +17,7 @@ tài liệu tham khảo đó. Hy vọng rằng nó có ích nếu bạn cảm th
 cuốn sách chuyên nghiệp về Git (Pro Git Book).
 
 Tài liệu này có bản gốc tiếng Anh tại http://gitref.org, do Schacon và
-một số người khác cùng xây dựng. Bản dịch tiếng Việt đầu tiên do Kỳ Anh
+một số người khác cùng xây dựng. Bản dịch tiếng Việt do Kỳ Anh và Tungd
 thực hiện; một số ý được hiệu chỉnh và bổ sung cho phù hợp với cách hiểu
 của người Việt và những người mới quen với Git. Hầu hết các thuật ngữ
 được chuyển ngữ, tuy nhiên một số sai sót hoặc hiểu nhầm có thể xảy ra
