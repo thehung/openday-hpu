@@ -766,6 +766,7 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
     </span>
     <a name="reset">git reset HEAD</a>
     <span class="desc">unstage changes that you have staged</span>
+    <span class="desc">lấy lại thay đổi</span>
   </h2>
 
   <div class="block">
@@ -775,6 +776,11 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
     tell you the three specific invocations of it that are generally
     helpful and ask you to blindly use it as I do - because it can be
     very useful.
+    </p>
+    <p><code>git reset</code> là một trong những lệnh rất dễ gây nhầm lẫn.  Tôi
+    là một người dùng lâu năm, thậm chí đã viết cả sách về Git, nhưng nhiều khi
+    vẫn bị nhầm lẫn khi sử dụng lệnh này. Vì thế, tài liệu này sẽ chỉ đề cập đến
+    ba trường hợp sử dụng cụ thể - những trường hợp mà tôi cho là hữu dụng nhất.
     </p>
 
     <p>In this case, we can use it to unstage something that you have
@@ -788,10 +794,21 @@ Các đoạn tiếp theo cũng được phân cách bằng những dòng trống
     get into the habit of using it to separate options from paths even if you
     don't need to.
     </p>
+    <p>Trong trường hợp này, ta sẽ dùng nó để lấy lại những thay đổi đã ghi
+    nhận. Giả sử bạn đã thay đổi hai file và muốn lưu lại trong hai lần xác
+    nhận riêng rẽ. Bạn nên ghi nhận và xác nhận lần lượt từng file một. Nếu
+    chẳng may bạn đã ghi nhận cả hai file này, thực hiện lệnh
+    <code>git reset HEAD -- file</code>. <code>--</code> dùng để thông báo
+    với Git rằng các tùy chọn đã được liệt kê hết, và sau đây sẽ là danh
+    sách đường dẫn, nhưng phân cách giữa các tùy chọn và đường dẫn là một
+    thói quen tốt.
+    </p>
 
     <p>So, let's see what it looks like to unstage something.  Here we have
     two files that have been modified since our last commit.  We will stage
     both, then unstage one of them.</p>
+    <p>Dưới đây ta sẽ ghi nhận thay đổi ở hai file và sau đó lần lượt lấy
+    lại những thay đổi của từng file.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -813,6 +830,10 @@ M hello.rb
     the changes to the <code>README</code> file, not the now unstaged
     <code>hello.rb</code>.
     </p>
+    <p>Bây giờ nếu bạn thực hiện lệnh <code>git commit</code> thì sẽ chỉ
+    ghi lại thay đổi ở file <code>README</code>, chứ không bao gồm những
+    thay đổi chưa được ghi nhận trong file <code>hello.rb</code>.
+    </p>
 
     <p class="aside">
     In case you're curious, what it's actually doing here is it is resetting
@@ -820,6 +841,13 @@ M hello.rb
     in the last commit.  Since <code>git add</code> checksums a file and adds
     it to the "index", <code>git reset HEAD</code> overwrites that with what
     it was before, thereby effectively unstaging it.
+    </p>
+    <p class="aside">
+    Khi bạn thực hiện lệnh này, thực tế là Git đã ghi đè checksum của một file
+    trong chỉ mục bằng checksum của chính file đó trong lần commit trước. Vì
+    <code>git add</code> tính checksum của một file và ghi nó vào chỉ mục,
+    <code>git reset HEAD</code> ghi lại nó bằng giá trị cũ, từ đó có thể bỏ
+    file khỏi phạm vi ghi nhận.
     </p>
 
     <p class="tip">
@@ -829,12 +857,21 @@ M hello.rb
     Once you have run that, you can then just run
     <code>git unstage [file]</code> instead.
     </p>
+    <p class="tip">
+    Bạn có thể tạo một lệnh tắt <code>git unstage</code>  bằng cách chaỵ lệnh
+    <code>git config --global alias.unstage "reset HEAD"</code>. Từ giờ bạn có
+    thể sử dụng lệnh <code>git unstage [file]</code> để thực hiện thao tác này.
+    </p>
 
     <p>If you forget the command to unstage something, Git is helpful in
        reminding you in the output of the normal <code>git status</code>
        command.  For example, if you run <code>git status</code> without
        the <code>-s</code> when you have staged files, it will tell you
        how to unstage them:</p>
+    <p>Nếu bạn không nhớ lệnh nào dùng để hủy ghi nhận thay đổi, Git sẽ nhắc
+       cho bạn trong kết quả của lệnh <code>git status</code>. Ví dụ khi bạn
+       dùng lệnh <code>git status</code> mà không dùng tùy chọn <code>-s</code>
+       sẽ được kết quả như sau:</p>
 
 <pre>
 <b>$ git status</b>
@@ -852,6 +889,11 @@ M hello.rb
     you run <code>git reset HEAD</code> to unstage files that you previously
     ran <code>git add</code> on and wish to not include in the next commit
     snapshot</p>
+    <p class="nutshell">
+    <strong>Tóm tắt:</strong>,
+    lệnh <code>git reset HEAD</code> dùng để thôi ghi nhận thay đổi ở những file
+    mà trước đấy đã được <code>git add</code> mà bạn chưa muốn xác nhận ngay.
+    </p>
 
   </div>
 </div>
@@ -864,6 +906,7 @@ M hello.rb
     </span>
     <a name="rm-mv">git rm</a>
     <span class="desc">remove files from the staging area</span>
+    <span class="desc">loại bỏ file ra khỏi vùng tạm</span>
   </h2>
 
   <div class="block">
@@ -874,9 +917,16 @@ M hello.rb
     there before we started modifying things.  <code>git rm</code> on the
     other hand just kicks the file off the stage entirely, so that it's not
     included in the next commit snapshot, thereby effectively deleting it.</p>
+    <p>Lệnh <code>git rm</code> sẽ loại bỏ file ra khỏi vùng ghi nhận. Điểm khác
+    biệt so với lệnh <code>git reset HEAD</code> ở chỗ lệnh lệnh này chỉ hoàn trả
+    vùng ghi nhận lại trạng thái ban đầu, còn lệnh <code>git rm</code> không chỉ
+    loại file khỏi vùng ghi nhận mà còn xóa nó.</p>
 
     <p>By default, a <code>git rm file</code> will remove the file from the
     staging area entirely and also off your disk (the working directory).</p>
+    <p>Theo mặc định, lệnh <code>git rm file</code> sẽ loại bỏ hoàn toàn file
+    đó khỏi vùng tạm và đồng thời cũng xóa luôn file trên đĩa cứng (thư mục
+    hiện hành).</p>
 
     <h4>
       git mv
@@ -894,18 +944,30 @@ M hello.rb
     <code>git add</code> on the new file.  You don't really need to use it, but
     if it's easier, feel free.
     </p>
+    <p>Khác với phần lớn các hệ thống quản lý mã nguồn khác, Git không theo dõi
+    các file bị đổi tên. Thay vào đó nó chỉ theo dõi các bản sao để phát hiện những
+    file đã bị xóa và thêm vào với nội dung giống nhau, khi đó Git sẽ hiểu đây là
+    trường hợp đổi tên. Mặc dù có lệnh <code>git mv</code>, nhưng nó là thừa -
+    lệnh này chỉ đơn thuần <code>git rm</code>, di chuyển file trên đĩa cứng và
+    sau đó là <code>git add</code> file mới.</p>
 
     <p class="aside">
     I personally don't use this command that much in it's normal form - to
     delete files.  It's often easier to just remove the files off your disk and
     then run a <code>git commit -a</code>, which will automatically remove them
     from your index, too.</p>
+    <p class="aside">
+    Tôi ít khi dùng lệnh này để xóa file. Thay vào đó chỉ cần xóa file trên đĩa
+    cứng và sau đó thực hiện lệnh <code>git commit -a</code> cũng sẽ giúp loại
+    bỏ file khỏi chỉ mục.</p>
 
     <p class="nutshell">
     <strong>In a nutshell</strong>,
     you run <code>git rm</code> to remove files from being tracked in Git. It
     will also remove them from your working directory.</p>
-    </p>
+    <strong>Tóm lại:</strong>,
+    lệnh <code>git rm</code> dùng để loại một file nào đó khỏi sự theo dõi của
+    Git và đồng thời cũng xóa file đó khỏi thư mục hiện hành.</p>
 
   </div>
 </div>
