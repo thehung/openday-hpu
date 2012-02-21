@@ -11,11 +11,6 @@ layout: reference
   </h2>
   <div class="block">
     <p>
-    Git is all about composing and saving snapshots of your project and then
-    working with and comparing those snapshots.  This section will explain
-    the commands needed to compose and commit snapshots of your project.
-    </p>
-    <p>
     Làm việc với Git chủ yếu bao gồm tạo và so sánh các bản sao của dự án. Phần
     này trình bày về những lệnh cần thiết để tạo và xác nhận các bản sao.
     </p>
@@ -27,10 +22,10 @@ layout: reference
     rather than having to commit all of the file changes at once.
     </p>
     <p>
-    Một khái niệm quan trọng của Git là 'chỉ mục'. Nó có thể được coi là một
-    vùng tạm chuẩn bị trước khi tạo bản sao, nhờ thế bạn có thể tạo những bản 
-    sao bao gồm một nhóm các thay đổi có ích thay vì phải xác nhận tất cả các
-    file cùng một lúc.
+    Một khái niệm quan trọng của Git là 'chỉ mục'. Có thể được coi nó là một
+    vùng tạm thời trước khi tạo bản sao chính, nhờ nó bạn có thể tạo những bản
+    sao bao gồm một nhóm các thay đổi được tổ chức tốt, thay vì phải xác nhận
+    thay đổi của tất cả các tập tin cùng một lúc.
     </p>
 
     <p class="nutshell">
@@ -274,7 +269,7 @@ layout: reference
     dùng lệnh <code>git status</code> khi cần xem những thay đổi để quyết định
     xem có nên ghi lại chúng hay không.
     </p>
-    
+
 
   </div>
 </div>
@@ -287,6 +282,7 @@ layout: reference
     </span>
     <a name="diff">git diff</a>
     <span class="desc">shows diff of what is staged and what is modified but unstaged</span>
+    <span class="desc">hiển thị những sai khác</span>
   </h2>
 
   <div class="block">
@@ -295,16 +291,25 @@ layout: reference
     <a href="/inspect">"Inspection and Comparison"</a>
     section. The way we're going to use it here is to describe the
     changes that are staged or modified on disk but unstaged.</p>
+    <p>Lệnh <code>git diff</code> có hai công dụng chính. Một trong số chúng ta sẽ
+    nói đến ở đây, đó là thể hiện những thay đổi đã được ghi nhận hoặc chưa được ghi
+    nhận. Còn công dụng còn lại sẽ được đề cập đến trong trong phần
+    <a href="/inspect">"Kiểm tra và so sánh"</a>.
 
     <h4>
       git diff
       <small>show diff of unstaged changes</small>
+      <small>chỉ ra những thay đổi chưa được ghi nhận</small>
     </h4>
 
     <p>Without any extra arguments, a simple <code>git diff</code> will display
     in unified diff format (a patch) what code or content you've changed in your
     project since the last commit that are not yet staged for the next commit
     snapshot.
+    </p>
+    <p>Mặc định <code>git diff</code> sẽ hiển thị tổng hợp những sự thay đổi
+    (một bản vá) mà bạn đã tạo ra so với lần xác nhận trước mà chưa được ghi
+    nhận cho lần xác nhận kế tiếp.
     </p>
 
 <pre>
@@ -332,10 +337,16 @@ index d62ac43..8d15d50 100644
     show you what those changes actually are, line by line.  It's generally
     a good follow-up command to <code>git status</code>
     </p>
+    <p>Trong khi lệnh <code>git status</code> sẽ cho ta biết file nào đã bị
+    thay đổi hay đã được ghi nhận kể từ lần xác nhận trước, <code>git diff</code>
+    sẽ chỉ ra những thay đổi đó chính xác là như thế nào. Thông thường
+    <code>git diff</code> này sẽ được dùng ngay sau <code>git status</code>
+    </p>
 
     <h4>
       git diff --cached
       <small>show diff of staged changes</small>
+      <small>hiển thị những thay đổi đã được ghi nhận</small>
     </h4>
 
     <p>The <code>git diff --cached</code> command will show you what contents
@@ -345,6 +356,9 @@ index d62ac43..8d15d50 100644
     <code>git diff</code> by itself won't show you any output because it will
     only show you what is <i>not yet</i> staged.
     </p>
+    <p>Lệnh <code>git diff --cached</code> sẽ cho ta thấy những thay đổi nào
+    đã được ghi nhận, cũng có nghĩa là những ghi nhận sẽ được lưu lại khi xác
+    nhận bản sao tiếp theo.
 
 <pre>
 <b>$ git status -s</b>
@@ -358,6 +372,8 @@ index d62ac43..8d15d50 100644
 
     <p>If you want to see the staged changes, you can run
     <code>git diff --cached</code> instead.</p>
+    <p>Để xem những thay đổi đã được ghi nhận, bạn có thể dùng lệnh
+    <code>git diff --cached</code></p>
 
 <pre>
 <b>$ git status -s</b>
@@ -383,6 +399,7 @@ index d62ac43..8d15d50 100644
     <h4>
       git diff HEAD
       <small>show diff of all staged or unstaged changes</small>
+      <small>Xem tất cả những sai khác</small>
     </h4>
 
     <p>If you want to see both staged and unstaged changes together, you
@@ -392,6 +409,12 @@ index d62ac43..8d15d50 100644
     <code>hello.rb</code> file then we'll have some changes staged and some
     changes unstaged.  Here are what all three <code>diff</code> commands
     will show you:</p>
+    <p>Để xem tất cả những sai khác cùng một lúc, bạn có thể dùng lệnh
+    <code>git diff HEAD</code> - về cơ bản nó có nghĩa là bạn muốn xem những
+    thay đổi so với lần xác nhận trước. Nếu ta thay đổi file <code>hello.rb</code>
+    lần nữa, ta sẽ có cả những sai khác chưa được ghi nhận và cả những sai
+    khác đã được ghi nhận. Chúng ta cùng xem lại kết quả của ba lệnh
+    <code>diff</code> này:</p>
 <pre>
 <b>$ vim hello.rb </b>
 <b>$ git diff</b>
@@ -442,12 +465,17 @@ index 2aabb6e..2ae9ba4 100644
     <h4>
       git diff --stat
       <small>show summary of changes instead of a full diff</small>
+      <small>xem tóm tắt những thay đổi</small>
     </h4>
 
     <p>If we don't want the full diff output, but we want more than the
     <code>git status</code> output, we can use the <code>--stat</code>
     option, which will give us a summary of changes instead. Here is the
     same example as above, but using the <code>--stat</code> option instead.
+    </p>
+    <p>Lệnh <code>git diff --stat</code> cho kết quả chi tiết hơn so với
+    lệnh <code>git status</code>, nhưng lại tóm lược hơn so với các lệnh
+    diff trên. Đây là ví dụ với tùy chọn <code>--stat</code>.
     </p>
 
 <pre>
@@ -468,6 +496,11 @@ index 2aabb6e..2ae9ba4 100644
     You can also provide a file path at the end of any of these options
     to limit the <code>diff</code> output to a specific file or subdirectory.
     </p>
+    <p>
+    Bạn cũng có thể bổ sung thêm đường dẫn đến file sau bất kỳ một trong những
+    tùy biến này để giới hạn kết quả của <code>diff</code> cho một file hay
+    trong một thư mục con.
+    </p>
 
 
     <p class="nutshell">
@@ -475,6 +508,9 @@ index 2aabb6e..2ae9ba4 100644
     you run <code>git diff</code> to see details of the <code>git status</code>
     command - <i>how</i> files have been modified or staged on a line by line
     basis.
+    <strong>Tóm tắt:</strong>,
+    lệnh <code>git diff</code> dùng để xem chi tiết hơn lệnh <code>git status</code>
+    - xem file đã được thay đổi <i>như thế nào</i>.
     </p>
 
 
@@ -804,4 +840,5 @@ M hello.rb
 </div>
 
 <p><a href="/branching">On to Branching and Merging &#187;</a></p>
+<p><a href="/branching">Đi đến rẽ nhánh và trộn &#187;</a></p>
 
